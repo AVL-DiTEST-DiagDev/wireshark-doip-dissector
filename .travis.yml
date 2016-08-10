@@ -24,18 +24,3 @@ script:
     - echo "executing tests"
     - ./src/test/bin/doip-test
 
-after_success:
-    - echo "create docker image"
-    - bash build/prepare_docker.sh
-    - docker build -t jufuch/amos-ss16-proj3 ./docker
-    - echo "upload image to docker"
-    - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" -e="$DOCKER_EMAIL"
-    - docker push jufuch/amos-ss16-proj3:latest
-    - docker logout
-    - echo "jenkins-deploy (if required)"
-    - bash deploy/deploytrigger.sh
-
-
-
-
-
