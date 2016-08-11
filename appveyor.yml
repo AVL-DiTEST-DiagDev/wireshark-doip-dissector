@@ -84,16 +84,16 @@ after_build:
 on_failure:
   - echo FAILURE! Nothing will be done.
 
-deploy:
-- provider: Environment
-  name: ftp-latest
+#deploy:
+#- provider: Environment
+#  name: ftp-latest
 
-- provider: Environment
-  name: ftp-candidate
-  on:
-    doipcandidate: true
+#- provider: Environment
+#  name: ftp-candidate
+#  on:
+#    doipcandidate: true
 
-- provider: Environment
-  name: ftp-release
-  on:
-    doiprelease: true
+#- provider: Environment
+#  name: ftp-release
+#  on:
+#    doiprelease: true
