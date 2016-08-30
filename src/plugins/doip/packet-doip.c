@@ -115,8 +115,7 @@ dissect_doip(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree, void *data _U_
     doip_header header;
     payload_handler handler;
 
-
-    proto_item *ti;
+    proto_item *ti = NULL;
     /*proto_tree *doip_tree;*/
 
 #ifndef NDEBUG
@@ -129,7 +128,7 @@ dissect_doip(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree, void *data _U_
         col_set_str(pinfo->cinfo, COL_PROTOCOL, DOIP_SHORTNAME);
     }
 
-    if (tvb && tree)
+    if (tvb)
     {
         if (fill_doip_header(&header, tvb))
         {
@@ -137,15 +136,16 @@ dissect_doip(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree, void *data _U_
             print_doip_header(DEBUG_OUTPUT, &header);
 #endif /* NDEBUG */
 
-
-            /* Create sub-tree which can be used for inserting proto-items */
-            ti = proto_tree_add_item(tree, proto_doip, tvb, 0, -1, ENC_NA);
+            if (tree) {
+                /* Create sub-tree which can be used for inserting proto-items */
+                ti = proto_tree_add_item(tree, proto_doip, tvb, 0, -1, ENC_NA);
 
 #ifndef NDEBUG
-            printf("before visualize doip header\n");
+                printf("before visualize doip header\n");
 #endif /* NDEBUG */
-            /* append all doip-header infos to proto-item */
-            visualize_doip_header(&header, ti);
+                /* append all doip-header infos to proto-item */
+                visualize_doip_header(&header, ti);
+            }
 
             /* find a handler suited for the given doip-type (header->payload.type) */
 #ifndef NDEBUG
