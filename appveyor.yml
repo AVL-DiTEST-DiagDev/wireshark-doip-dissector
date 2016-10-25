@@ -3,7 +3,7 @@ version: '0.0.1-{build}'
 clone_folder: c:\projects\ws-plugin
 
 environment:
-  CYG_ROOT: C:\cygwin64
+  CYG_ROOT: C:\cygwin
 
 # script after cloning repo:
 install:
@@ -12,16 +12,16 @@ install:
   - cd c:\own-download
 
 platform:
-  - x64
+  - win32
   
 before_build:
   - echo BeforeBuild Script now!
   # add Cygwin to PATH
-  - set PATH=%PATH%;C:\cygwin64\bin\
-  - set PATH=C:\cygwin64\bin\;%PATH%
+  - set PATH=%PATH%;C:\cygwin\bin\
+  - set PATH=C:\cygwin\bin\;%PATH%
   - mkdir c:\projects\wireshark
   # get Wireshark and checkout the Branch vor Stable Version 2.0.x
-  - git clone https://github.com/wireshark/wireshark.git c:\projects\wireshark
+  - git clone https://github.com/wireshark/wireshark.git -b avlditest --depth 1 c:\projects\wireshark
   - cd c:\projects\wireshark
   - git checkout master-2.0
   # set necessary environment variables: 
