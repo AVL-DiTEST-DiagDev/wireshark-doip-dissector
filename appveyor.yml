@@ -21,7 +21,7 @@ before_build:
   - set PATH=C:\cygwin\bin\;%PATH%
   - mkdir c:\projects\wireshark
   # get Wireshark and checkout the Branch vor Stable Version 2.0.x
-  - git clone https://github.com/wireshark/wireshark.git -b avlditest --depth 1 c:\projects\wireshark
+  - git clone https://github.com/wireshark/wireshark.git --depth 1 c:\projects\wireshark
   - cd c:\projects\wireshark
   - git checkout master-2.0
   # set necessary environment variables: 
