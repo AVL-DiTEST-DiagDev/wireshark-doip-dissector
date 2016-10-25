@@ -31,7 +31,7 @@ before_build:
   # set necessary environment variables: 
   - cmd: set CYGWIN=nodosfilewarning
   - cmd: set WIRESHARK_BASE_DIR=c:\projects
-  - cmd: set WIRESHARK_TARGET_PLATFORM=win64
+  - cmd: set WIRESHARK_TARGET_PLATFORM=win32
   - cmd: set QT5_BASE_DIR=c:\Qt\5.6\msvc2013
   - cmd: set WIRESHARK_VERSION_EXTRA=-YourExtraVersionInfo
   # insert our pluginfiles to wireshark
@@ -41,16 +41,16 @@ before_build:
   # run the adjustment scripts
   - bash ./add_doip_cmake.sh
   - bash ./option_disabler.sh
-  - ps: Invoke-WebRequest -Uri https://cygwin.com/setup-x86_64.exe -OutFile c:\projects\cygwin-setup.exe
+  - ps: Invoke-WebRequest -Uri https://cygwin.com/setup-x86.exe -OutFile c:\projects\cygwin-setup.exe
   - mkdir c:\projects\cyg-packages
-  - c:\projects\cygwin-setup.exe -q -n -N -d -R C:\cygwin64 -s http://ftp.hawo.stw.uni-erlangen.de/cygwin/ -l c:\projects\cyg-packages -P  flex -P bison
-  - cmd: set WIRESHARK_CYGWIN_INSTALL_PATH=C:\cygwin64
+  - c:\projects\cygwin-setup.exe -q -n -N -d -R C:\cygwin -s http://ftp.hawo.stw.uni-erlangen.de/cygwin/ -l c:\projects\cyg-packages -P  flex -P bison
+  - cmd: set WIRESHARK_CYGWIN_INSTALL_PATH=C:\cygwin
 
 build_script:
   - echo Build Script now!
   - mkdir c:\projects\wiresharkBuild
   - cd  c:\projects\wiresharkBuild
-  - cmake -DENABLE_CHM_GUIDES=on -G "Visual Studio 12 Win64" c:\projects\wireshark
+  - cmake -DENABLE_CHM_GUIDES=on -G "Visual Studio 12" c:\projects\wireshark
   -  msbuild /m /p:Configuration=RelWithDebInfo c:\projects\wiresharkBuild\plugins\doip\doip.vcxproj
 
 after_build:
