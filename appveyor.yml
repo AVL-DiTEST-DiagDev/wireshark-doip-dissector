@@ -10,10 +10,6 @@ install:
   - echo Install Script now!
   - mkdir c:\own-download
   - cd c:\own-download
-  # Download winflexbison and add to PATH:
-  - appveyor DownloadFile http://darki2002.bplaced.net/amos/win_flex_bison-2.5.5.zip
-  - 7z x win_flex_bison-2.5.5.zip
-  - set Path=c:\own-download\win_flex_bison-2.5.5;%Path%
 
 platform:
   - x64
